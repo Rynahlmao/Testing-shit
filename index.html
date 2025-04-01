@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilibili Text Effect with Menu</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Main Menu Overlay */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: opacity 1s ease;
+            z-index: 2;
+        }
+
+        .menu-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .enter-button {
+            background: #00a1d6;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .enter-button:hover {
+            background: #0087b3;
+        }
+
+        /* Danmaku (Scrolling Text) */
+        .danmaku-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .danmaku {
+            position: absolute;
+            white-space: nowrap;
+            font-size: 20px;
+            font-weight: bold;
+            animation: moveText 5s linear forwards;
+        }
+
+        @keyframes moveText {
+            from { transform: translateX(100vw); }
+            to { transform: translateX(-100%); }
+        }
+
+        /* Hide Menu */
+        .fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Menu -->
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-title">Welcome to Bilibili Danmaku</div>
+        <button class="enter-button" id="enterButton">Enter</button>
+    </div>
+
+    <!-- Danmaku Scrolling Text -->
+    <div class="danmaku-container"></div>
+
+    <script>
+        const menuOverlay = document.getElementById('menuOverlay');
+        const enterButton = document.getElementById('enterButton');
+        const danmakuContainer = document.querySelector('.danmaku-container');
+        
+        const messages = [
+            "弹幕来啦！", "B站YYDS!", "前方高能", "这个好好玩", "加油!", "2333333", "UP主太强了!"
+        ];
+
+        function createDanmaku() {
+            const danmaku = document.createElement("div");
+            danmaku.classList.add("danmaku");
+            danmaku.textContent = messages[Math.floor(Math.random() * messages.length)];
+            
+            danmaku.style.top = Math.random() * 90 + "%";  
+            danmaku.style.color = `hsl(${Math.random() * 360}, 100%, 70%)`; 
+
+            danmakuContainer.appendChild(danmaku);
+
+            setTimeout(() => {
+                danmaku.remove();
+            }, 5000); 
+        }
+
+        enterButton.addEventListener('click', function() {
+            menuOverlay.classList.add('fade-out'); 
+            setInterval(createDanmaku, 800);
+        });
+    </script>
+
+</body>
+</html>
