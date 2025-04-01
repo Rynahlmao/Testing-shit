@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TBDL</title>
+    <title>Donna High School - Links</title>
     <style>
         body {
             margin: 0;
@@ -11,10 +11,11 @@
             background-color: black;
             color: white;
             font-family: Arial, sans-serif;
+            text-align: center;
         }
 
         /* Main Menu Overlay */
-        .menu-overlay {
+        .menu-overlay, .link-screen {
             position: fixed;
             top: 0;
             left: 0;
@@ -25,7 +26,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
             transition: opacity 1s ease;
             z-index: 2;
         }
@@ -75,31 +75,75 @@
             to { transform: translateX(-100%); }
         }
 
-        /* Hide Menu */
+        /* Hide Screens */
         .fade-out {
             opacity: 0;
             pointer-events: none;
         }
+
+        /* Anime Character */
+        .anime-character {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 150px;
+            height: auto;
+            z-index: 3;
+        }
+
+        /* Clickable Text in the Middle */
+        .link-screen {
+            display: none;
+            flex-direction: column;
+        }
+
+        .clickable-text {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 15px 0;
+            color: #00a1d6;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .clickable-text:hover {
+            color: #ff4081;
+        }
+
     </style>
 </head>
 <body>
 
     <!-- Main Menu -->
     <div class="menu-overlay" id="menuOverlay">
-        <div class="menu-title">DHS DATALEAK</div>
+        <div class="menu-title">Welcome to Donna High School</div>
         <button class="enter-button" id="enterButton">Enter</button>
+    </div>
+
+    <!-- Second Screen with Clickable Text -->
+    <div class="link-screen" id="linkScreen">
+        <p class="clickable-text" onclick="window.open('https://example.com/1', '_blank')">School Website</p>
+        <p class="clickable-text" onclick="window.open('https://example.com/2', '_blank')">Student Portal</p>
+        <p class="clickable-text" onclick="window.open('https://example.com/3', '_blank')">Upcoming Events</p>
+        <p class="clickable-text" onclick="window.open('https://example.com/4', '_blank')">Teacher Contacts</p>
+        <p class="clickable-text" onclick="window.open('https://example.com/5', '_blank')">School Policies</p>
     </div>
 
     <!-- Danmaku Scrolling Text -->
     <div class="danmaku-container"></div>
 
+    <!-- Anime Character -->
+    <img src="https://your-image-url.com/anime-character.png" alt="Anime Character" class="anime-character">
+
     <script>
         const menuOverlay = document.getElementById('menuOverlay');
         const enterButton = document.getElementById('enterButton');
         const danmakuContainer = document.querySelector('.danmaku-container');
-        
+        const linkScreen = document.getElementById('linkScreen');
+
         const messages = [
-            "FUCK YOU", "LOLOLOL", "DATALEAK uwu", "i hate faggots", "WHY DO YOU HATE ME", "BLAH BLAH BLAH", "NIGGA"
+            "弹幕来啦！", "B站YYDS!", "前方高能", "这个好好玩", "加油!", "2333333", "UP主太强了!"
         ];
 
         function createDanmaku() {
@@ -119,7 +163,11 @@
 
         enterButton.addEventListener('click', function() {
             menuOverlay.classList.add('fade-out'); 
-            setInterval(createDanmaku, 800);
+            setTimeout(() => {
+                menuOverlay.style.display = 'none';
+                linkScreen.style.display = 'flex';
+                setInterval(createDanmaku, 800);
+            }, 1000);
         });
     </script>
 
