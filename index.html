@@ -15,7 +15,7 @@
         }
 
         /* Main Menu Overlay */
-        .menu-overlay, .link-screen {
+        .menu-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -27,7 +27,7 @@
             align-items: center;
             justify-content: center;
             transition: opacity 1s ease;
-            z-index: 2;
+            z-index: 3;
         }
 
         .menu-title {
@@ -75,26 +75,15 @@
             to { transform: translateX(-100%); }
         }
 
-        /* Hide Screens */
-        .fade-out {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* Anime Character */
-        .anime-character {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            width: 150px;
-            height: auto;
-            z-index: 3;
-        }
-
         /* Clickable Text in the Middle */
         .link-screen {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             display: none;
             flex-direction: column;
+            z-index: 2;
         }
 
         .clickable-text {
@@ -111,6 +100,22 @@
             color: #ff4081;
         }
 
+        /* Anime Character */
+        .anime-character {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 150px;
+            height: auto;
+            z-index: 2;
+        }
+
+        /* Hide Screens */
+        .fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
     </style>
 </head>
 <body>
@@ -121,7 +126,7 @@
         <button class="enter-button" id="enterButton">Enter</button>
     </div>
 
-    <!-- Second Screen with Clickable Text -->
+    <!-- Clickable Text Links -->
     <div class="link-screen" id="linkScreen">
         <p class="clickable-text" onclick="window.open('https://example.com/1', '_blank')">School Website</p>
         <p class="clickable-text" onclick="window.open('https://example.com/2', '_blank')">Student Portal</p>
@@ -169,6 +174,9 @@
                 setInterval(createDanmaku, 800);
             }, 1000);
         });
+
+        // Keep spawning danmaku even before clicking "Enter"
+        setInterval(createDanmaku, 1500);
     </script>
 
 </body>
