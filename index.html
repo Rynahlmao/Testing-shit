@@ -183,10 +183,19 @@
         setInterval(createDanmaku, 1500);
     </script>
 
-    <audio controls loop>
-  <source src="song.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
+    <audio id="background-audio" loop>
+  <source src="your-song.mp3" type="audio/mpeg">
 </audio>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    let audio = document.getElementById("background-audio");
+    audio.play().catch(error => {
+      console.log("Autoplay blocked, user interaction needed.");
+    });
+  });
+</script>
+
 
 
 </body>
